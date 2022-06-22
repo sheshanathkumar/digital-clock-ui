@@ -10,6 +10,12 @@
 </head>
 
 <body id="body">
+
+    <div class="person-name">
+        Welcome Shesho
+    </div>
+
+
     <div id="time">
         <div class="circle" style="--clr:#ff0000;">
             <div class="dots hr_dot"> </div>
@@ -50,61 +56,72 @@
             </div>
         </div>
     </div>
+
+    <div class="search">
+        <input class="google-search"  type="text" name='inputText' id="input-text" />
+        <button type="button" class="button" onclick="googleSearch()">Search</button>
+    </div>
+
     <script>
-
-
+        function googleSearch() {
+            let query = document.getElementById('input-text').value;
+            let googleSearch = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+            window.location =  googleSearch;
+            
+        }
 
         setInterval(() => {
-            let body = document.getElementById('body')
-            
-            let time = document.getElementById('time')
-            let hour = document.getElementById('hour');
-            let minut = document.getElementById('minute');
-            let second = document.getElementById('second');
-            let ampm = document.getElementById('ampm');
+        let body = document.getElementById('body')
+
+        let time = document.getElementById('time')
+        let hour = document.getElementById('hour');
+        let minut = document.getElementById('minute');
+        let second = document.getElementById('second');
+        let ampm = document.getElementById('ampm');
+        let personName = document.querySelector('.person-name');
 
 
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
 
-            let h = new Date().getHours();
-            let m = new Date().getMinutes();
-            let s = new Date().getSeconds();
+        let isSunSet = (h >= 5 && h <= 18) ? false : true;
 
-            let isSunSet = (h >= 5 && h <= 17) ? false : true ;
-            
-            body.style.background = (isSunSet) ? '#404040' : '#e6e6e6'
-            time.style.color = (isSunSet) ? '#ffffff' : '#000000'
-
-
-            let am = h >= 12 ? 'PM' : 'AM';
-
-            h = (h > 12) ? h % 12 : h;
-
-            h = (h < 10) ? '0' + h : h;
-            m = (m < 10) ? '0' + m : m;
-            s = (s < 10) ? '0' + s : s;
-
-            hour.innerHTML = h + "<br><span>Hr</span></br>";
-            minut.innerHTML = m + "<br><span>Min</span></br>";
-            second.innerHTML = s + "<br><span>Sec</span></br>";
-            ampm.innerHTML = am;
-
-            let hh = document.getElementById('hh');
-            let mm = document.getElementById('mm');
-            let ss = document.getElementById('ss');
-
-            hh.style.strokeDashoffset = 440 - (440 * h) / 12;
-            mm.style.strokeDashoffset = 440 - (440 * m) / 60;
-            ss.style.strokeDashoffset = 440 - (440 * s) / 60;
+        document.body.style.backgroundImage = (isSunSet) ? 'url(night-bg.jpg)' : "url(day-bg.jpg)" ;
+       personName.style.color = (isSunSet) ? '#ffffff' : '#000000';
+        time.style.color = (isSunSet) ? '#ffffff' : '#000000';
 
 
-            let hrDot = document.querySelector('.hr_dot');
-            let mmDot = document.querySelector('.min_dot');
-            let ssDot = document.querySelector('.sec_dot');
+        let am = h >= 12 ? 'PM' : 'AM';
+
+        h = (h > 12) ? h % 12 : h;
+
+        h = (h < 10) ? '0' + h : h;
+        m = (m < 10) ? '0' + m : m;
+        s = (s < 10) ? '0' + s : s;
+
+        hour.innerHTML = h + "<br><span>Hr</span></br>";
+        minut.innerHTML = m + "<br><span>Min</span></br>";
+        second.innerHTML = s + "<br><span>Sec</span></br>";
+        ampm.innerHTML = am;
+
+        let hh = document.getElementById('hh');
+        let mm = document.getElementById('mm');
+        let ss = document.getElementById('ss');
+
+        hh.style.strokeDashoffset = 440 - (440 * h) / 12;
+        mm.style.strokeDashoffset = 440 - (440 * m) / 60;
+        ss.style.strokeDashoffset = 440 - (440 * s) / 60;
 
 
-            hrDot.style.transform = `rotate(${h * 30}deg)`;
-            mmDot.style.transform = `rotate(${m * 6}deg)`;
-            ssDot.style.transform = `rotate(${s * 6}deg)`;
+        let hrDot = document.querySelector('.hr_dot');
+        let mmDot = document.querySelector('.min_dot');
+        let ssDot = document.querySelector('.sec_dot');
+
+
+        hrDot.style.transform = `rotate(${h * 30}deg)`;
+        mmDot.style.transform = `rotate(${m * 6}deg)`;
+        ssDot.style.transform = `rotate(${s * 6}deg)`;
 
 
         })
