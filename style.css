@@ -18,7 +18,8 @@ body {
 .person-name{
     margin: auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bolder;
+    font-weight: 400px;
+    font-size: 100px;
 }
 
 .search{
