@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="analogue-clock-style.css" />
+    <title>Analogue Clock</title>
+</head>
+
+<body>
+
+    <!-- <div class="clock-button">
+        <button type="button" class="switch-clock-button">
+            <p>change clock</p>
+        </button>
+    </div> -->
+
+
+    <div class="person-name">
+        Welcome Shesho
+    </div>
+    <div class="container">
+
+        <div class="clock">
+            <div id="sec-hand" class="hand" style="--clr:#c81515"><i></i></div>
+            <div id="min-hand" class="hand hand2" style="--clr:#15c84b"><i></i></div>
+            <div id="hour-hand" class="hand hand3" style="--clr:#1815c8"><i></i></div>
+
+            <span style="--dig:1"><b>1</b></span>
+            <span style="--dig:2"><b>2</b></span>
+            <span style="--dig:3"><b>3</b></span>
+            <span style="--dig:4"><b>4</b></span>
+            <span style="--dig:5"><b>5</b></span>
+            <span style="--dig:6"><b>6</b></span>
+            <span style="--dig:7"><b>7</b></span>
+            <span style="--dig:8"><b>8</b></span>
+            <span style="--dig:9"><b>9</b></span>
+            <span style="--dig:10"><b>10</b></span>
+            <span style="--dig:11"><b>11</b></span>
+            <span style="--dig:12"><b>12</b></span>
+        </div>
+
+    </div>
+
+    <div class="search">
+        <input class="google-search" type="text" name='inputText' id="input-text" />
+        <button type="button" class="button" onclick="googleSearch()">Search</button>
+    </div>
+
+    <script>
+
+        function googleSearch() {
+            let query = document.getElementById('input-text').value;
+            let googleSearch = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+            window.location = googleSearch;
+
+        }
+
+        setInterval(() => {
+            let hourHand = document.getElementById('hour-hand');
+            let minHand = document.getElementById('min-hand');
+            let secHand = document.getElementById('sec-hand');
+            let clock = document.querySelector('.clock');
+            let personName = document.querySelector('.person-name');
+
+
+            var hour = new Date().getHours();
+            var minute = new Date().getMinutes();
+            var seconds = new Date().getSeconds();
+
+            console.log(hour + " : " + minute + " : " + seconds)
+            let isSunSet = (hour >= 5 && hour <= 19) ? false : true;
+            document.body.style.backgroundImage = (isSunSet) ? 'url(night-bg.jpg)' : "url(day-bg.jpg)";
+            //document.body.style.background = (isSunSet) ? '#2a2c2c' : "#fff";
+            clock.style.color = (isSunSet) ? '#fff' : "#000";
+            personName.style.color =  (isSunSet) ? '#fff' : "#000";
+
+            var secDegree = seconds * 6;
+            secHand.style.transform = `rotate(${secDegree}deg)`;
+
+            var minDegree = minute * 6;
+            minHand.style.transform = `rotate(${minDegree}deg)`;
+
+
+            var hrDegree = (hour * 30 + (1 / 2 * minute)) % 360;
+            console.log(hrDegree);
+
+            hourHand.style.transform = `rotate(${hrDegree}deg)`;
+
+        });
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
